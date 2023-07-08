@@ -1,6 +1,7 @@
 package org.sid.app.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.sid.app.repository.DefenseRepository;
@@ -9,7 +10,7 @@ import org.sid.app.entities.Defense;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefenseService {
+public class DefenseService implements DefenceServices{
 
 	private final DefenseRepository defenseRepository;
 
@@ -33,6 +34,10 @@ public class DefenseService {
 		return defenseRepository.findById(defenseId).map(DefenseService::mapToDto).orElse(null);
 	}
 
+	public Optional<DefenseDto> findById(int defenseId) {
+		return Optional.ofNullable(defenseRepository.findById((long) defenseId).map(DefenseService::mapToDto).orElse(null));
+	}
+
 	public List<DefenseDto> findAll() {
 		return defenseRepository.findAll().stream().map(DefenseService::mapToDto).collect(Collectors.toList());
 	}
@@ -46,7 +51,7 @@ public class DefenseService {
 		return null;
 	}
 
-	public static Defense mapToEntity(DefenseDto defenseDto) {
+	public Defense mapToEntity(DefenseDto defenseDto) {
 		if (defenseDto != null) {
 			return new Defense(defenseDto.getDefenseId(), defenseDto.getDate(), defenseDto.getClassroom(),
 					defenseDto.getJuries().stream().map(TeacherService::mapToEntity).collect(Collectors.toSet()),
