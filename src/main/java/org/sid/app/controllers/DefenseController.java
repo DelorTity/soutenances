@@ -1,16 +1,14 @@
 package org.sid.app.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.sid.app.dto.DefenseDto;
+import org.sid.app.entities.Defense;
 import org.sid.app.services.DefenseService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/defenses")
@@ -33,13 +31,28 @@ public class DefenseController {
 		defenseService.deleteById(defenseId);
 	}
 
-	@GetMapping("/deleteDefense/{defenseId}")
+	@GetMapping("/getDefense/{defenseId}")
 	public DefenseDto findById(@PathVariable Long defenseId) {
 		return defenseService.findById(defenseId);
 	}
 
-	@GetMapping("/getaAllDefenses")
+	@GetMapping("/getAllDefenses")
 	public List<DefenseDto> findAll() {
 		return defenseService.findAll();
+	}
+
+	@PutMapping("/defense/{defenseId}")
+	public ResponseEntity<DefenseDto> update(@PathVariable long defenseId, @RequestBody DefenseDto defenseDto) {
+		Optional<DefenseDto> defenseOptional = Optional.ofNullable(defenseService.findById(defenseId));
+
+		if (defenseOptional.isPresent()) {
+			DefenseDto _defense = defenseOptional.get();
+			_defense.setClassroom(defenseDto.getClassroom());
+			_defense.setDate(defenseDto.getDate());
+			_defense.setStudent(defenseDto.getStudent());
+			return new ResponseEntity<>(defenseService.add(_defense), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 }

@@ -30,7 +30,8 @@ CREATE TABLE `company` (
 INSERT INTO `company` (`company_id`, `address`, `city`, `country`, `email`, `name`, `tel`, `zip`) VALUES
 
 (1, 'Ange Raphael','Douala','Cameroun','delor@gmail.com','SoftWify', 695624691, 1897),
-(2, 'maie 18','limbe.','Cameroon','del@gmail.com','PJD', 6951624691, 1097);
+(2, 'maie 18','limbe.','Cameroon','del@gmail.com','PJD', 651955471, 1497),
+(3, 'pongo','edea.','Cameroon','del@gmail.com','Camtel', 6951624691, 1097);
 
 --
 -- Dumping data for table `company`
@@ -61,7 +62,9 @@ CREATE TABLE `defense` (
 INSERT INTO `defense` (`defense_id`, `classroom`,`date`, `student_student_id`) VALUES
 
 (1, 'Amphi 200','2022-07-20',2),
-(2, 'B5','2022-07-24',1);
+(2, 'B5','2022-07-24',1),
+(3, 'B2','2022-07-24',3);
+
 --
 -- Dumping data for table `defense`
 --
@@ -98,7 +101,9 @@ UNLOCK TABLES;
 INSERT INTO `defense_juries` (`defense_defense_id`, `juries_teacher_id`) VALUES
 
 (1, 2),
-(2, 1);
+(2, 1),
+(3, 3);
+
 
 --
 -- Table structure for table `hibernate_sequence`
@@ -141,7 +146,8 @@ CREATE TABLE `speciality` (
 INSERT INTO `speciality` (`speciality_id`, `name`, `department_head_teacher_id`) VALUES
 
 (1,'informatique', 2),
-(2,'informatique',  1);
+(2,'informatique',  1),
+(3,'Genie mechanique', 2);
 
 --
 -- Dumping data for table `speciality`
@@ -183,7 +189,8 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`student_id`, `age`, `city`, `country`, `email`, `first_name`,`last_name`, `tel`, `zip`, `speciality_speciality_id`,`supervisor_teacher_id`, `topic_topic_id`) VALUES
 
 (1, 25,'Douala.','Cameroun','delor@gmail.com','nzima','yvan', 695624691, 1897, 2, 1, 1),
-(2, 22,'limbe.','Cameroon','del@gmail.com','mbang','moise', 6951624691, 1097, 1, 2, 2);
+(2, 22,'limbe.','Cameroon','del@gmail.com','mbang','moise', 6951624691, 1097, 1, 2, 2),
+(3, 24,'Edea.','Cameroon','del@gmail.com','NDOM','Emile', 6889809, 1454, 3, 1, 3);
 
 --
 -- Dumping data for table `student`
@@ -218,7 +225,8 @@ CREATE TABLE `teacher` (
 INSERT INTO `teacher` (`teacher_id`, `age`, `city`, `country`, `email`, `first_name`,`last_name`, `tel`, `zip`) VALUES
 
 (1, 36,'Douala.','Cameroun','delor@gmail.com','TITY ','DELOR', 695624691, 1897),
-(2, 30, 'limbe.','Cameroon','del@gmail.com','Komto','francois', 6951624691, 1097);
+(2, 30, 'limbe.','Cameroon','del@gmail.com','Komto','francois', 6951624691, 1097),
+(3, 40, 'douala.','Cameroon','del@gmail.com','Emmanuelle','Theodore', 6951624691, 1656);
 
 --
 -- Dumping data for table `teacher`
@@ -252,7 +260,8 @@ CREATE TABLE `topic` (
 INSERT INTO `topic` (`topic_id`, `domain`, `duration`, `title`, `company_company_id`) VALUES
 
 (1, 'genie logiciel',30,'Gestion des soutenances',1),
-(2, 'genie logiciel',30,'gestion des hopitaux',2);
+(2, 'genie logiciel',30,'gestion des hopitaux',2),
+(3, 'genie mechanique',30,'depagnage d`un moteur',3);
 
 --
 -- Dumping data for table `topic`
