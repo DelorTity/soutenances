@@ -3,7 +3,7 @@ package org.sid.app.controllers;
 import java.util.List;
 
 import org.sid.app.dto.CompanyDto;
-import org.sid.app.services.CompanyService;
+import org.sid.app.services.CompanyServiceImpl;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,31 +16,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/companies")
 public class CompanyController {
 
-	private final CompanyService companyService;
+	private final CompanyServiceImpl companyServiceImpl;
 
-	public CompanyController(CompanyService companyService) {
+	public CompanyController(CompanyServiceImpl companyServiceImpl) {
 		super();
-		this.companyService = companyService;
+		this.companyServiceImpl = companyServiceImpl;
 	}
 
 	@PostMapping("/addCompany")
 	public CompanyDto add(@RequestBody CompanyDto companyDto) {
-		return companyService.add(companyDto);
+		return companyServiceImpl.add(companyDto);
 	}
 
 	@DeleteMapping("/deleteCompany/{companyId}")
 	public void delete(@PathVariable Long companyId) {
-		companyService.deleteById(companyId);
+		companyServiceImpl.deleteById(companyId);
 	}
 
 	@GetMapping("/getCompany/{companyId}")
 	public CompanyDto findById(@PathVariable Long companyId) {
-		return companyService.findById(companyId);
+		return companyServiceImpl.findById(companyId);
 	}
 
 	@GetMapping("/getAllCompanies")
 	public List<CompanyDto> findAll() {
-		return companyService.findAll();
+		return companyServiceImpl.findAll();
 	}
 
 }

@@ -4,22 +4,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.sid.app.dto.DefenseDto;
-import org.sid.app.entities.Defense;
-import org.sid.app.services.DefenseService;
+import org.sid.app.services.DefenceServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/defenses")
 public class DefenseController {
 
-	private final DefenseService defenseService;
-
-	public DefenseController(DefenseService defenseService) {
-		super();
-		this.defenseService = defenseService;
-	}
+	@Autowired
+	private DefenceServices defenseService;
 
 	@PostMapping("/addDefense")
 	public DefenseDto add(@RequestBody DefenseDto defenseDto) {
@@ -54,5 +52,12 @@ public class DefenseController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@GetMapping("/getDefense")
+	public String getDefense(Model model){
+		List<DefenseDto> defenses = defenseService.findAll();
+		model.addAttribute("defenses", defenses);
+		return "getDefenses";
 	}
 }

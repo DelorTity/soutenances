@@ -20,7 +20,7 @@ public class TopicService {
 
 	public TopicDto add(TopicDto topicDto) {
 		return mapToDto(topicRepository.save(new Topic(topicDto.getTopicId(), topicDto.getTitle(), topicDto.getDomain(),
-				topicDto.getDuration(), CompanyService.mapToEntity(topicDto.getCompany()))));
+				topicDto.getDuration(), CompanyServiceImpl.mapToEntity(topicDto.getCompany()))));
 	}
 
 	public void deleteById(Long topicId) {
@@ -38,7 +38,7 @@ public class TopicService {
 	public static TopicDto mapToDto(Topic topic) {
 		if (topic != null) {
 			return new TopicDto(topic.getTopicId(), topic.getTitle(), topic.getDomain(), topic.getDuration(),
-					CompanyService.mapToDto(topic.getCompany()));
+					CompanyServiceImpl.mapToDto(topic.getCompany()));
 		}
 		return null;
 	}
@@ -46,7 +46,7 @@ public class TopicService {
 	public static Topic mapToEntity(TopicDto topicDto) {
 		if (topicDto != null) {
 			return new Topic(topicDto.getTopicId(), topicDto.getTitle(), topicDto.getDomain(), topicDto.getDuration(),
-					CompanyService.mapToEntity(topicDto.getCompany()));
+					CompanyServiceImpl.mapToEntity(topicDto.getCompany()));
 		}
 		return null;
 	}

@@ -10,11 +10,11 @@ import org.sid.app.entities.Defense;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DefenseService implements DefenceServices{
+public class DefenseServiceImpl implements DefenceServices{
 
 	private final DefenseRepository defenseRepository;
 
-	public DefenseService(DefenseRepository defenseRepository) {
+	public DefenseServiceImpl(DefenseRepository defenseRepository) {
 		super();
 		this.defenseRepository = defenseRepository;
 	}
@@ -31,15 +31,15 @@ public class DefenseService implements DefenceServices{
 	}
 
 	public DefenseDto findById(Long defenseId) {
-		return defenseRepository.findById(defenseId).map(DefenseService::mapToDto).orElse(null);
+		return defenseRepository.findById(defenseId).map(DefenseServiceImpl::mapToDto).orElse(null);
 	}
 
 	public Optional<DefenseDto> findById(int defenseId) {
-		return Optional.ofNullable(defenseRepository.findById((long) defenseId).map(DefenseService::mapToDto).orElse(null));
+		return Optional.ofNullable(defenseRepository.findById((long) defenseId).map(DefenseServiceImpl::mapToDto).orElse(null));
 	}
 
 	public List<DefenseDto> findAll() {
-		return defenseRepository.findAll().stream().map(DefenseService::mapToDto).collect(Collectors.toList());
+		return defenseRepository.findAll().stream().map(DefenseServiceImpl::mapToDto).collect(Collectors.toList());
 	}
 
 	public static DefenseDto mapToDto(Defense defense) {
